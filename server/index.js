@@ -8,11 +8,10 @@ import dotenv from 'dotenv';
 
 import globalError from './src/middlewares/global_error.middleware.js';
 import routeHandler from './src/middlewares/route_handler.middleware.js';
+import connectDb from './src/configs/db.config.js';
 
 dotenv.config();
-
 const app=express();
-
 
 app.use(express.json());
 app.use(cookieParser());
@@ -28,6 +27,7 @@ const limiter=ratelimiter({
 });
 app.use(limiter);
 
+await connectDb();
 
 app.use(routeHandler);
 app.use(globalError);
