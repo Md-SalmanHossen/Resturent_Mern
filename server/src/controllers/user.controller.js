@@ -78,6 +78,7 @@ export const userLogin = async (req, res) => {
 
 export const adminLogin = async (req, res) => {
   try {
+    res.
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -88,6 +89,11 @@ export const adminLogin = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
+      res.clearCookie('token');
+      return res.status(200).json({
+         success:false,
+         message:'User logout successfully',
+      })
   } catch (error) {
     res.status(500).json({
       success: false,
