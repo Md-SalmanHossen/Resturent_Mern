@@ -129,11 +129,21 @@ export const adminLogin = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token");
-    res.status(200).json({ success: true, message: "User logged out successfully" });
+    res.clearCookie("token",{
+      httpOnly:true,
+      sameSite:'strict',
+      secure:process.env.NODE_ENV==='production',
+      path:'/',
+    });
+    res.status(200).json({success: true, 
+      message: "User logged out successfully" 
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-   };
+    res.status(500).json({
+       success: false, 
+       message: error.message 
+    });
+  };
 }
 
 export const getProfile = async (req, res) => {

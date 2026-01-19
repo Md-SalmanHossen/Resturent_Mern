@@ -12,6 +12,7 @@ const generateToken = (res, payload) => {
     httpOnly: true,
     secure: process.env.NODE_ENV == "production",
     sameSite: "strict",
+    path:'/',
     maxAge: 3 * 24 * 60 * 60 * 1000,
   });
 
