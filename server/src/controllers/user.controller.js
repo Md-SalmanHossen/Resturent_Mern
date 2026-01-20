@@ -1,10 +1,8 @@
 import User from "../models/user.model.js";
 import generateToken from "../utils/generate_token.utils.js";
 
-// user.controller.js
 
 export const signup = async (req, res) => {
-  console.log("Signup controller loaded");
   try {
     const { name, email, password } = req.body;
 

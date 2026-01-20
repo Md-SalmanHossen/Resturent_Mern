@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-// 1️⃣ Create the user schema
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -12,22 +11,18 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// 2️⃣ Hash password before saving
+
 userSchema.pre("save", async function () {
-  // Only hash the password if it has been modified (or is new)
   if (!this.isModified("password")) return;
 
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-// 3️⃣ Create a method to compare entered password with hashed password
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// 4️⃣ Create the model
 const User = mongoose.model("User", userSchema);
 
-// 5️⃣ Export it
 export default User;
