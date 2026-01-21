@@ -45,11 +45,6 @@ export const signup = async (req, res) => {
   }
 };
 
-console.log("Signup controller loaded");
-
-
-
-/*
 export const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -192,4 +187,3 @@ export const isAuth = async (req, res) => {
     });
   }
 };
-*/
